@@ -32,6 +32,8 @@ contract Challlenge01 {
     constructor(string memory name_, string memory symbol_) {
         _name = name_;
         _symbol = symbol_;
+//1. Decimals are not set!
+// Decimals not working
     }
 
     function name() public view virtual returns (string memory) {
@@ -85,6 +87,8 @@ contract Challlenge01 {
         if (fromBalance < value) revert InsufficientBalance(from, fromBalance, value);
 
         _balances[to] += value;
+//2. receiver's account is updated but not sender's
+// _balances[from] -= value; is not used.
         emit Transfer(from, to, value);
     }
 
@@ -106,6 +110,7 @@ contract Challlenge01 {
         }
     }
 
+//3. mint and burn are not used. they are useless internal functions!
     function _mint(address account, uint256 value) internal {
         if (account == address(0)) revert InvalidReceiver(account);
         _totalSupply += value;
